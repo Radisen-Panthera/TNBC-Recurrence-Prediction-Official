@@ -3,8 +3,8 @@
 Weakly-supervised patch classification + histogram aggregation pipeline for predicting
 triple-negative breast cancer (TNBC) recurrence from H&E whole-slide images (WSIs), and for
 generating spatially-resolved recurrence-risk heatmaps. This is a cleaned-up, runnable version of
-the pipeline used in *"Spatial proteomics guided by H&E-based AI reveals recurrence-risk niches in
-triple-negative breast cancer"*.
+the pipeline used in *"[Spatial proteomics guided by H&E-based AI reveals recurrence-risk niches in
+triple-negative breast cancer](https://arxiv.org/abs/2608.03145)"*.
 
 The AI model here is **not** intended as a validated, deployable recurrence predictor. It is an
 exploratory tool: a patch-level classifier trained with weak (patient-level) labels is used to
