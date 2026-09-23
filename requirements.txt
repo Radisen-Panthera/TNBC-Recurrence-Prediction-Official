@@ -1,0 +1,30 @@
+# Core
+torch
+torchvision
+timm
+numpy
+pandas
+scipy
+scikit-learn
+scikit-image
+lifelines
+
+# Whole-slide image I/O
+openslide-python
+h5py
+
+# Training / logging
+tensorboardX
+tqdm
+Pillow
+
+# Notebooks (STAGE1/2, TIGER training, patch_info_extraction)
+jupyter
+nbformat
+ipykernel
+
+# proteomics_analysis/targeted_panel
+scikit-survival
+
+# Optional: GPU-accelerated slide reading (falls back to openslide if absent)
+# cucim

@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Model weights / checkpoints (large binaries, not for git)
+*.pth
+*.pt
+*.ckpt
+
+# Data / precomputed artifacts (large, and/or contain patient-derived info)
+*.h5
+*.npy
+*.npz
+*.pkl
+0_folds/
+TIGER_training/tiger_weights/
+TIGER_training/ROI_sampling_all/
+TIGER_training/candidate_patch_coords/
+weights_STAGE1/
+tensorboard_STAGE1*/
+tensorboard_log_tiger/
+stage2_outputs/
+TIGER_labeled_tiles_512/
+
+# Proteomics data / outputs (raw MS data, precursor matrices — not for git)
+proteomics_analysis/*/data/
+proteomics_analysis/*/*.csv
+!proteomics_analysis/*/README.md
+
+# Clinical / patient data — never commit
+clinical_info*.csv
+*patient*.csv
+*clinical*.csv
+*sample*status*.xlsx
+
+# OS / editor
+.DS_Store
+.vscode/
