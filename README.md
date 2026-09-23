@@ -178,3 +178,7 @@ is used both to pick the reported checkpoint/configuration and to report its per
 the TIGER classifier's test metrics as an unbiased estimate of its tissue-compartment classification
 accuracy, and STAGE1/STAGE2's test metrics as descriptive of the specific configuration reported in
 the paper rather than as validated generalization estimates.
+
+## License
+
+This repository is released under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
