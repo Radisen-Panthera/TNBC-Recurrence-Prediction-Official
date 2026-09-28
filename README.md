@@ -3,8 +3,8 @@
 Weakly-supervised patch classification + histogram aggregation pipeline for predicting
 triple-negative breast cancer (TNBC) recurrence from H&E whole-slide images (WSIs), and for
 generating spatially-resolved recurrence-risk heatmaps. This is a cleaned-up, runnable version of
-the pipeline used in *"[Spatial proteomics guided by H&E-based AI reveals recurrence-risk niches in
-triple-negative breast cancer](https://arxiv.org/abs/2608.03145)"*.
+the pipeline used in *"Spatial proteomics guided by H&E-based AI reveals recurrence-risk niches in
+triple-negative breast cancer"*.
 
 The AI model here is **not** intended as a validated, deployable recurrence predictor. It is an
 exploratory tool: a patch-level classifier trained with weak (patient-level) labels is used to
@@ -131,6 +131,9 @@ python TIGER_training/labeling_TIGER_inference.py \
 # (3) build the patch_info pickle used by STAGE1 — run patch_info_extraction.ipynb
 
 # (4) train STAGE1
+# --train_df_dir / --test_df_dir: your own clinical/outcome CSVs, pre-split into train/test,
+# each with at least `tube label` (matches the WSI filename stem), `Recur` (0/1), and `RFS`
+# (recurrence-free survival time) columns -- see "Data you need to supply" above
 python STAGE1_patch_classification.py \
   --dirs ./ROI_sampling_all/coords \
   --slide_dir /path/to/wsi \
@@ -155,11 +158,5 @@ python STAGE2_histogram_aggregation.py \
 
 `STAGE2_histogram_aggregation.py` writes per-patient predictions and summary metrics (AUC,
 C-index) to `--out_dir` (default `./stage2_outputs/`).
-
-`STAGE1_patch_classification.py` validates every `--test_interval` iterations on the
-test set (Val/AUC, KS-statistic, Wasserstein distance, logged to TensorBoard under `--writer_dir`)
-and supports early stopping (`--early_stop_patience`) and resuming from a checkpoint
-(`--resume_checkpoint` / `--start_iteration` / `--best_auc_init`) so you don't have to restart
-training from scratch to extend a run.
-
-
+accuracy, and STAGE1/STAGE2's test metrics as descriptive of the specific configuration reported in
+the paper rather than as validated generalization estimates.
