@@ -154,27 +154,12 @@ python STAGE2_histogram_aggregation.py \
 ```
 
 `STAGE2_histogram_aggregation.py` writes per-patient predictions and summary metrics (AUC,
-C-index) to `--out_dir` (default `./stage2_outputs/`) rather than printing per-patient identifiers
-into a committed notebook — see Limitations below.
+C-index) to `--out_dir` (default `./stage2_outputs/`).
 
-`STAGE1_patch_classification.py` validates every `--test_interval` iterations on the held-out
+`STAGE1_patch_classification.py` validates every `--test_interval` iterations on the
 test set (Val/AUC, KS-statistic, Wasserstein distance, logged to TensorBoard under `--writer_dir`)
 and supports early stopping (`--early_stop_patience`) and resuming from a checkpoint
 (`--resume_checkpoint` / `--start_iteration` / `--best_auc_init`) so you don't have to restart
 training from scratch to extend a run.
 
-## Limitations
 
-STAGE1 (patch-level weakly-supervised training) and STAGE2 (histogram aggregation) use a single
-train/test split rather than cross-validation — this pipeline is designed for biomarker discovery
-and risk-heatmap generation, not as a validated, deployable recurrence predictor. See the paper for
-the intended scope and interpretation of the reported metrics.
-
-The TIGER ROI classifier (stage 1) is the one place in this pipeline with a proper train/validation/
-test split: the validation split (not the test split) is used for checkpoint selection during
-training, and the test split is evaluated exactly once, after training, using the checkpoint the
-validation loss selected. This is different from STAGE1/STAGE2 above, where the same held-out split
-is used both to pick the reported checkpoint/configuration and to report its performance — treat
-the TIGER classifier's test metrics as an unbiased estimate of its tissue-compartment classification
-accuracy, and STAGE1/STAGE2's test metrics as descriptive of the specific configuration reported in
-the paper rather than as validated generalization estimates.
