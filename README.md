@@ -89,9 +89,12 @@ with CUDA 12.x.
 This repo ships **no data** — no WSIs, no clinical labels, no model checkpoints. You need:
 
 - **WSIs** in a directory openslide can read (`.svs` etc.), one file per patient.
-- **A DINO-pretrained ConvNeXt-Base checkpoint** (`G2B_BRCA.pth` in the scripts' defaults) used as
-  the frozen/fine-tuned feature-extractor backbone, with a `state_dict['student']` key holding a
-  `StudentModel_convnext`-shaped state dict (backbone + projection head).
+- **A breast-cancer-distilled ConvNeXt-Base checkpoint** (`G2B_BRCA.pth`) used as the
+  frozen/fine-tuned feature-extractor backbone, with a `state_dict['student']` key holding a
+  `StudentModel_convnext`-shaped state dict (backbone + projection head). This checkpoint is
+  provided [here](https://drive.google.com/file/d/1YY_-ygq46-f1Kvx66zpKi7_YYVxNjy2j/view?usp=sharing) —
+  download it and place it at the repository root (`G2B_BRCA.pth`), matching the scripts' default
+  `FEATURE_EXTRACTOR_DIR` / `--feature_extractor` paths.
 - **Clinical/outcome CSVs** with at minimum `tube label` (matches the WSI filename stem),
   `Recur` (0/1), and `RFS` (recurrence-free survival time, for C-index) columns. STAGE1/STAGE2
   expect a pre-split `train_df` / `test_df` pair (see `--train_df_dir`/`--test_df_dir` in
@@ -158,5 +161,3 @@ python STAGE2_histogram_aggregation.py \
 
 `STAGE2_histogram_aggregation.py` writes per-patient predictions and summary metrics (AUC,
 C-index) to `--out_dir` (default `./stage2_outputs/`).
-accuracy, and STAGE1/STAGE2's test metrics as descriptive of the specific configuration reported in
-the paper rather than as validated generalization estimates.
